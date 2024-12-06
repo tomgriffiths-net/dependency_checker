@@ -2,6 +2,10 @@
 class dependency_checker{
     public static function command($line):void{
         echo json_encode(self::getFileDependencies($line), JSON_PRETTY_PRINT) . "\n";
+        $onlineInfo = pkgmgr::getPackageInfo($line,true);
+        if(isset($onlineInfo['latest_version'])){
+            echo "Package LastVersion: " . $onlineInfo['latest_version'] . "\n";
+        }
     }
     //public static function init():void{}
     public static function getFileDependencies(string $localPackageId):array{
